@@ -1,7 +1,17 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\InvitationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/token/{token}', [InvitationController::class, 'show'])->name('invitation.show');
+Route::post('/token/{token}', [InvitationController::class, 'store'])->name('invitation.store');
+
+Route::get('/admin/login', [AdminController::class, 'loginForm'])->name('admin.login');
+Route::post('/admin/login', [AdminController::class, 'login']);
+Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/admin/tokens', [AdminController::class, 'createToken'])->name('admin.tokens.create');
 });

@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__laravel-boost__application-info",
+      "Bash(php artisan make:migration:*)",
+      "Bash(where:*)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:migration create_invitation_tokens_table --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:migration create_registrations_table --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:model InvitationToken --factory --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:model Registration --factory --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:seeder AdminSeeder --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:controller:*)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:controller AdminController --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan make:request StoreRegistrationRequest --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan migrate --no-interaction)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" vendor/bin/pint --dirty)",
+      "Bash(\"C:/Users/grupo/.config/herd/bin/php.bat\" artisan test --compact)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "laravel-boost"
+  ]
+}
