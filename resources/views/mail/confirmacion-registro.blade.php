@@ -73,6 +73,10 @@
                                                 <td style="color: #000000; font-size: 14px; padding: 5px 0;">{{ $registration->correo }}</td>
                                             </tr>
                                             <tr>
+                                                <td style="color: #666666; font-size: 14px; padding: 5px 0;">Celular:</td>
+                                                <td style="color: #000000; font-size: 14px; padding: 5px 0;">{{ $registration->celular }}</td>
+                                            </tr>
+                                            <tr>
                                                 <td style="color: #666666; font-size: 14px; padding: 5px 0;">Acompañantes:</td>
                                                 <td style="color: #000000; font-size: 14px; padding: 5px 0;">{{ $registration->numero_acompanantes }}</td>
                                             </tr>

@@ -47,6 +47,16 @@
                 </div>
 
                 <div>
+                    <label for="celular" class="block text-sm font-medium text-neutral-700 mb-1">Número de celular</label>
+                    <input type="tel" name="celular" id="celular" value="{{ old('celular') }}"
+                        class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-brand-black focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition"
+                        required>
+                    @error('celular')
+                        <p class="text-brand-brown text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
                     <label for="pregunta" class="block text-sm font-medium text-neutral-700 mb-1">¿Qué esperas del lanzamiento? <span class="text-neutral-400 font-normal">(opcional)</span></label>
                     <textarea name="pregunta" id="pregunta" rows="3"
                         class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 text-brand-black focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none transition resize-none">{{ old('pregunta') }}</textarea>

@@ -22,6 +22,7 @@ class RegistrationFactory extends Factory
             'nombre' => fake()->firstName(),
             'apellido' => fake()->lastName(),
             'correo' => fake()->safeEmail(),
+            'celular' => fake()->phoneNumber(),
             'pregunta' => fake()->sentence(),
             'numero_acompanantes' => fake()->numberBetween(0, 5),
         ];

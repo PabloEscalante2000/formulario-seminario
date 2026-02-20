@@ -16,6 +16,7 @@ class Registration extends Model
         'nombre',
         'apellido',
         'correo',
+        'celular',
         'pregunta',
         'numero_acompanantes',
     ];

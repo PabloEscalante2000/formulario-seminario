@@ -24,6 +24,10 @@
                     <p class="text-brand-black">{{ $registration->correo }}</p>
                 </div>
                 <div>
+                    <span class="text-sm font-medium text-neutral-500">Celular</span>
+                    <p class="text-brand-black">{{ $registration->celular }}</p>
+                </div>
+                <div>
                     <span class="text-sm font-medium text-neutral-500">Acompañantes</span>
                     <p class="text-brand-black">{{ $registration->numero_acompanantes }}</p>
                 </div>

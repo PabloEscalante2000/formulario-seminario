@@ -133,6 +133,7 @@
                         <tr>
                             <th class="px-6 py-3 text-left font-medium">Nombre</th>
                             <th class="px-6 py-3 text-left font-medium">Correo</th>
+                            <th class="px-6 py-3 text-left font-medium">Celular</th>
                             <th class="px-6 py-3 text-left font-medium">¿Qué espera del evento?</th>
                             <th class="px-6 py-3 text-left font-medium">Acompañantes</th>
                             <th class="px-6 py-3 text-left font-medium">Fecha</th>
@@ -143,13 +144,14 @@
                             <tr>
                                 <td class="px-6 py-3 text-brand-black">{{ $registration->nombre }} {{ $registration->apellido }}</td>
                                 <td class="px-6 py-3 text-neutral-600">{{ $registration->correo }}</td>
+                                <td class="px-6 py-3 text-neutral-600">{{ $registration->celular }}</td>
                                 <td class="px-6 py-3 text-neutral-600 max-w-xs truncate">{{ $registration->pregunta }}</td>
                                 <td class="px-6 py-3 text-neutral-600">{{ $registration->numero_acompanantes }}</td>
                                 <td class="px-6 py-3 text-neutral-500">{{ $registration->created_at->format('d/m/Y H:i') }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="px-6 py-8 text-center text-neutral-400">No hay registros aún.</td>
+                                <td colspan="6" class="px-6 py-8 text-center text-neutral-400">No hay registros aún.</td>
                             </tr>
                         @endforelse
                     </tbody>

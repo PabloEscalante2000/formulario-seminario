@@ -48,6 +48,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
             'pregunta' => 'Aprender sobre el amor',
             'numero_acompanantes' => 2,
         ]);
@@ -59,6 +60,7 @@ class InvitationTest extends TestCase
             'invitation_token_id' => $token->id,
             'nombre' => 'Juan',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
         ]);
 
         $token->refresh();
@@ -73,6 +75,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
             'pregunta' => 'Aprender',
             'numero_acompanantes' => 0,
         ]);
@@ -88,7 +91,7 @@ class InvitationTest extends TestCase
 
         $response = $this->post(route('invitation.store', $token->token), []);
 
-        $response->assertSessionHasErrors(['nombre', 'apellido', 'correo', 'numero_acompanantes']);
+        $response->assertSessionHasErrors(['nombre', 'apellido', 'correo', 'celular', 'numero_acompanantes']);
     }
 
     public function test_submission_validates_email_format(): void
@@ -99,6 +102,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'not-an-email',
+            'celular' => '999888777',
             'pregunta' => 'Aprender',
             'numero_acompanantes' => 0,
         ]);
@@ -114,6 +118,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
             'pregunta' => 'Aprender',
             'numero_acompanantes' => 15,
         ]);
@@ -131,6 +136,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
             'pregunta' => 'Aprender sobre el amor',
             'numero_acompanantes' => 2,
         ]);
@@ -149,6 +155,7 @@ class InvitationTest extends TestCase
             'nombre' => 'Juan',
             'apellido' => 'Perez',
             'correo' => 'juan@example.com',
+            'celular' => '999888777',
             'pregunta' => 'Aprender',
             'numero_acompanantes' => 0,
         ]);
