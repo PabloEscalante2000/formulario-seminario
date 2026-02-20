@@ -5,10 +5,10 @@
 @section('content')
 <div class="max-w-6xl mx-auto px-4 py-8">
     <div class="flex items-center justify-between mb-8">
-        <h1 class="text-2xl font-bold text-slate-800">Panel de Administracion</h1>
+        <h1 class="text-2xl font-bold text-slate-800">Panel de Administración</h1>
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf
-            <button type="submit" class="text-sm text-slate-500 hover:text-slate-700 transition cursor-pointer">Cerrar sesion</button>
+            <button type="submit" class="text-sm text-slate-500 hover:text-slate-700 transition cursor-pointer">Cerrar sesión</button>
         </form>
     </div>
 
@@ -20,7 +20,7 @@
     <div class="bg-white rounded-2xl shadow-md p-6 mb-8">
         <div class="flex items-center justify-between">
             <div>
-                <h2 class="text-lg font-semibold text-slate-800">Tokens de invitacion</h2>
+                <h2 class="text-lg font-semibold text-slate-800">Tokens de invitación</h2>
                 <p class="text-sm text-slate-500">Genera un nuevo token para enviar a un invitado.</p>
             </div>
             <form method="POST" action="{{ route('admin.tokens.create') }}">
@@ -34,9 +34,24 @@
     </div>
 
     {{-- Tabla de tokens --}}
+    @php $filtro = request()->query('filtro'); @endphp
     <div class="bg-white rounded-2xl shadow-md overflow-hidden mb-8">
-        <div class="px-6 py-4 border-b border-slate-100">
+        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between gap-4">
             <h2 class="text-lg font-semibold text-slate-800">Tokens ({{ $tokens->count() }})</h2>
+            <div class="flex gap-1">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="px-3 py-1 text-xs rounded-full font-medium transition {{ !$filtro ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                    Todos
+                </a>
+                <a href="{{ route('admin.dashboard', ['filtro' => 'disponibles']) }}"
+                    class="px-3 py-1 text-xs rounded-full font-medium transition {{ $filtro === 'disponibles' ? 'bg-green-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                    Disponibles
+                </a>
+                <a href="{{ route('admin.dashboard', ['filtro' => 'usados']) }}"
+                    class="px-3 py-1 text-xs rounded-full font-medium transition {{ $filtro === 'usados' ? 'bg-slate-700 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200' }}">
+                    Usados
+                </a>
+            </div>
         </div>
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -61,8 +76,17 @@
                             </td>
                             <td class="px-6 py-3">
                                 @if ($invitationToken->isAvailable())
-                                    <input type="text" readonly value="{{ route('invitation.show', $invitationToken->token) }}"
-                                        class="text-xs bg-slate-50 border border-slate-200 rounded px-2 py-1 w-64 text-slate-600 select-all">
+                                    <div class="flex items-center gap-1">
+                                        <input type="text" readonly value="{{ route('invitation.show', $invitationToken->token) }}"
+                                            id="link-{{ $invitationToken->id }}"
+                                            class="text-xs bg-slate-50 border border-slate-200 rounded px-2 py-1 w-64 text-slate-600 select-all">
+                                        <button type="button" onclick="copiarEnlace({{ $invitationToken->id }})"
+                                            class="p-1.5 rounded hover:bg-slate-100 transition text-slate-400 hover:text-slate-600 cursor-pointer" title="Copiar enlace">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
                                 @else
                                     <span class="text-xs text-slate-400">-</span>
                                 @endif
@@ -90,8 +114,8 @@
                     <tr>
                         <th class="px-6 py-3 text-left font-medium">Nombre</th>
                         <th class="px-6 py-3 text-left font-medium">Correo</th>
-                        <th class="px-6 py-3 text-left font-medium">Que espera del seminario</th>
-                        <th class="px-6 py-3 text-left font-medium">Acompanantes</th>
+                        <th class="px-6 py-3 text-left font-medium">¿Qué espera del evento?</th>
+                        <th class="px-6 py-3 text-left font-medium">Acompañantes</th>
                         <th class="px-6 py-3 text-left font-medium">Fecha</th>
                     </tr>
                 </thead>
@@ -106,7 +130,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-8 text-center text-slate-400">No hay registros aun.</td>
+                            <td colspan="5" class="px-6 py-8 text-center text-slate-400">No hay registros aún.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -114,4 +138,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    function copiarEnlace(id) {
+        const input = document.getElementById('link-' + id);
+        navigator.clipboard.writeText(input.value).then(function () {
+            const btn = input.nextElementSibling;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>';
+            setTimeout(function () { btn.innerHTML = originalHtml; }, 1500);
+        });
+    }
+</script>
 @endsection

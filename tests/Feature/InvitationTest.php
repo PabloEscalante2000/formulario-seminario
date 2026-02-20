@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Mail\ConfirmacionRegistro;
 use App\Models\InvitationToken;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class InvitationTest extends TestCase
@@ -117,5 +119,40 @@ class InvitationTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors(['numero_acompanantes']);
+    }
+
+    public function test_confirmation_email_is_sent_after_registration(): void
+    {
+        Mail::fake();
+
+        $token = InvitationToken::factory()->create();
+
+        $this->post(route('invitation.store', $token->token), [
+            'nombre' => 'Juan',
+            'apellido' => 'Perez',
+            'correo' => 'juan@example.com',
+            'pregunta' => 'Aprender sobre el amor',
+            'numero_acompanantes' => 2,
+        ]);
+
+        Mail::assertSent(ConfirmacionRegistro::class, function (ConfirmacionRegistro $mail) {
+            return $mail->hasTo('juan@example.com')
+                && $mail->registration->nombre === 'Juan';
+        });
+    }
+
+    public function test_no_email_sent_with_invalid_token(): void
+    {
+        Mail::fake();
+
+        $this->post(route('invitation.store', 'nonexistent-token'), [
+            'nombre' => 'Juan',
+            'apellido' => 'Perez',
+            'correo' => 'juan@example.com',
+            'pregunta' => 'Aprender',
+            'numero_acompanantes' => 0,
+        ]);
+
+        Mail::assertNothingSent();
     }
 }

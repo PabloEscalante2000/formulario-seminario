@@ -35,12 +35,19 @@ class AdminController extends Controller
         ])->onlyInput('email');
     }
 
-    public function dashboard(): View
+    public function dashboard(Request $request): View
     {
-        $tokens = InvitationToken::query()
+        $tokensQuery = InvitationToken::query()
             ->with('registration')
-            ->latest()
-            ->get();
+            ->latest();
+
+        if ($request->query('filtro') === 'disponibles') {
+            $tokensQuery->where('is_used', false);
+        } elseif ($request->query('filtro') === 'usados') {
+            $tokensQuery->where('is_used', true);
+        }
+
+        $tokens = $tokensQuery->get();
 
         $registrations = Registration::query()
             ->with('invitationToken')

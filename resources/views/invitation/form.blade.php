@@ -1,15 +1,15 @@
 @extends('layouts.app')
 
-@section('title', 'Invitacion al Seminario')
+@section('title', 'Invitacion al Lanzamiento del Libro')
 
 @section('content')
 <div class="flex items-center justify-center min-h-screen px-4 py-12">
     <div class="w-full max-w-lg">
         <div class="bg-white rounded-2xl shadow-xl p-8">
             <div class="text-center mb-8">
-                <h1 class="text-3xl font-bold text-slate-800">Seminario</h1>
+                <h1 class="text-3xl font-bold text-slate-800">Lanzamiento del Libro</h1>
                 <p class="text-slate-500 mt-2">El Amor es un Delirio</p>
-                <a href="https://seminario.elamoresundelirio.com" class="text-indigo-600 text-sm hover:underline mt-1 inline-block" target="_blank" rel="noopener noreferrer">seminario.elamoresundelirio.com</a>
+                <a href="https://elamoresundelirio.com" class="text-indigo-600 text-sm hover:underline mt-1 inline-block" target="_blank" rel="noopener noreferrer">elamoresundelirio.com</a>
             </div>
 
             <form method="POST" action="{{ route('invitation.store', $token) }}" class="space-y-5">
@@ -36,7 +36,7 @@
                 </div>
 
                 <div>
-                    <label for="correo" class="block text-sm font-medium text-slate-700 mb-1">Correo electronico</label>
+                    <label for="correo" class="block text-sm font-medium text-slate-700 mb-1">Correo electrónico</label>
                     <input type="email" name="correo" id="correo" value="{{ old('correo') }}"
                         class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
                         required>
@@ -46,7 +46,7 @@
                 </div>
 
                 <div>
-                    <label for="pregunta" class="block text-sm font-medium text-slate-700 mb-1">Que esperas del seminario?</label>
+                    <label for="pregunta" class="block text-sm font-medium text-slate-700 mb-1">¿Qué esperas del lanzamiento?</label>
                     <textarea name="pregunta" id="pregunta" rows="4"
                         class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition resize-none"
                         required>{{ old('pregunta') }}</textarea>
@@ -56,7 +56,7 @@
                 </div>
 
                 <div>
-                    <label for="numero_acompanantes" class="block text-sm font-medium text-slate-700 mb-1">Numero de acompanantes</label>
+                    <label for="numero_acompanantes" class="block text-sm font-medium text-slate-700 mb-1">Número de acompañantes</label>
                     <input type="number" name="numero_acompanantes" id="numero_acompanantes" value="{{ old('numero_acompanantes', 0) }}" min="0" max="10"
                         class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-800 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition"
                         required>

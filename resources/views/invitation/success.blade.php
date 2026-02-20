@@ -12,7 +12,7 @@
                 </svg>
             </div>
             <h1 class="text-2xl font-bold text-slate-800 mb-2">Registro exitoso!</h1>
-            <p class="text-slate-500">Tu asistencia al seminario ha sido confirmada. Te esperamos!</p>
+            <p class="text-slate-500">Tu asistencia al lanzamiento del libro ha sido confirmada. ¡Te esperamos!</p>
         </div>
     </div>
 </div>
