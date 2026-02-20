@@ -14,6 +14,7 @@ class InvitationToken extends Model
     protected $fillable = [
         'token',
         'is_used',
+        'expires_at',
     ];
 
     /**
@@ -23,6 +24,7 @@ class InvitationToken extends Model
     {
         return [
             'is_used' => 'boolean',
+            'expires_at' => 'datetime',
         ];
     }
 
@@ -33,6 +35,19 @@ class InvitationToken extends Model
 
     public function isAvailable(): bool
     {
-        return ! $this->is_used;
+        if ($this->is_used) {
+            return false;
+        }
+
+        if ($this->expires_at && $this->expires_at->isPast()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->expires_at && $this->expires_at->isPast();
     }
 }

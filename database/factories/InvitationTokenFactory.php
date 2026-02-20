@@ -20,6 +20,7 @@ class InvitationTokenFactory extends Factory
         return [
             'token' => Str::random(32),
             'is_used' => false,
+            'expires_at' => now()->addMonths(2),
         ];
     }
 

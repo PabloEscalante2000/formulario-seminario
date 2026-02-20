@@ -57,13 +57,28 @@ class AdminController extends Controller
         return view('admin.dashboard', compact('tokens', 'registrations'));
     }
 
-    public function createToken(): RedirectResponse
+    public function createToken(Request $request): RedirectResponse
     {
-        InvitationToken::query()->create([
-            'token' => Str::random(32),
+        $request->validate([
+            'cantidad' => ['required', 'integer', 'min:1', 'max:50'],
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Token creado exitosamente.');
+        $cantidad = (int) $request->input('cantidad', 1);
+
+        $expiresAt = now()->addMonths(2);
+
+        for ($i = 0; $i < $cantidad; $i++) {
+            InvitationToken::query()->create([
+                'token' => Str::random(32),
+                'expires_at' => $expiresAt,
+            ]);
+        }
+
+        $mensaje = $cantidad === 1
+            ? 'Token creado exitosamente.'
+            : "$cantidad tokens creados exitosamente.";
+
+        return redirect()->route('admin.dashboard')->with('success', $mensaje);
     }
 
     public function logout(Request $request): RedirectResponse

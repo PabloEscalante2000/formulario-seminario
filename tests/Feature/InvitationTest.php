@@ -88,7 +88,7 @@ class InvitationTest extends TestCase
 
         $response = $this->post(route('invitation.store', $token->token), []);
 
-        $response->assertSessionHasErrors(['nombre', 'apellido', 'correo', 'pregunta', 'numero_acompanantes']);
+        $response->assertSessionHasErrors(['nombre', 'apellido', 'correo', 'numero_acompanantes']);
     }
 
     public function test_submission_validates_email_format(): void

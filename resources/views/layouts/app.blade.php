@@ -12,7 +12,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen font-sans antialiased">
+<body class="bg-gradient-to-br from-neutral-50 to-neutral-100 min-h-screen font-sans antialiased">
     @yield('content')
 </body>
 </html>

@@ -25,7 +25,7 @@ class StoreRegistrationRequest extends FormRequest
             'nombre' => ['required', 'string', 'max:255'],
             'apellido' => ['required', 'string', 'max:255'],
             'correo' => ['required', 'email', 'max:255'],
-            'pregunta' => ['required', 'string', 'max:2000'],
+            'pregunta' => ['nullable', 'string', 'max:2000'],
             'numero_acompanantes' => ['required', 'integer', 'min:0', 'max:10'],
         ];
     }
@@ -40,7 +40,7 @@ class StoreRegistrationRequest extends FormRequest
             'apellido.required' => 'El apellido es obligatorio.',
             'correo.required' => 'El correo es obligatorio.',
             'correo.email' => 'Ingresa un correo valido.',
-            'pregunta.required' => 'La pregunta es obligatoria.',
+            'pregunta.max' => 'La respuesta no puede exceder 2000 caracteres.',
             'numero_acompanantes.required' => 'Indica el numero de acompanantes.',
             'numero_acompanantes.min' => 'El numero de acompanantes no puede ser negativo.',
             'numero_acompanantes.max' => 'El maximo de acompanantes es 10.',

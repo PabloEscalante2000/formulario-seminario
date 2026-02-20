@@ -72,15 +72,31 @@ class AdminTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $response = $this->actingAs($user)->post(route('admin.tokens.create'));
+        $response = $this->actingAs($user)->post(route('admin.tokens.create'), [
+            'cantidad' => 1,
+        ]);
 
         $response->assertRedirect(route('admin.dashboard'));
         $this->assertDatabaseCount('invitation_tokens', 1);
     }
 
+    public function test_admin_can_create_multiple_tokens(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('admin.tokens.create'), [
+            'cantidad' => 5,
+        ]);
+
+        $response->assertRedirect(route('admin.dashboard'));
+        $this->assertDatabaseCount('invitation_tokens', 5);
+    }
+
     public function test_token_creation_requires_authentication(): void
     {
-        $response = $this->post(route('admin.tokens.create'));
+        $response = $this->post(route('admin.tokens.create'), [
+            'cantidad' => 1,
+        ]);
 
         $response->assertRedirect(route('admin.login'));
         $this->assertDatabaseCount('invitation_tokens', 0);

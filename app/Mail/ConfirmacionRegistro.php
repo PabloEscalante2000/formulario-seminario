@@ -18,6 +18,8 @@ class ConfirmacionRegistro extends Mailable
 
     public string $qrImageData;
 
+    public string $logoImageData;
+
     public function __construct(public Registration $registration)
     {
         $this->registration->loadMissing('invitationToken');
@@ -25,6 +27,8 @@ class ConfirmacionRegistro extends Mailable
         $this->verificacionUrl = route('verificacion.show', $this->registration->invitationToken->token);
 
         $this->qrImageData = (string) QrCode::format('png')->size(250)->generate($this->verificacionUrl);
+
+        $this->logoImageData = file_get_contents(public_path('images/itas_icono.png'));
     }
 
     public function envelope(): Envelope
